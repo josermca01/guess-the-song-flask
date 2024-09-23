@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify,request
 import python  # Import your Python script
 from flask_cors import CORS
 from dotenv import load_dotenv
@@ -13,11 +13,16 @@ app = Flask(__name__)
 cors = CORS(app, resources={r"/get_playlist/*": {"origins": [url_front_local,url_front_remote]}})
 
 
-@app.route('/get_playlist/<int:playlist_id>', methods=['GET'])
-def get_playlist(playlist_id):
-    text = python.main(playlist_id)
+
+@app.route('/get_playlist', methods=['GET'])
+def get_playlist():
+    playlist_id = request.args.get('playlist_id',default=5206929684,type=int)
+    text = python.get_playlist_by_id(playlist_id)
     response = jsonify(text)
     return response
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,7 +1,7 @@
 import requests
 import random
 
-def main(playlist_id):
+def get_playlist_by_id(playlist_id):
     # Step 1: Retrieve the tracks in the playlist
     NUMGAMES = 3
     NUMSONGS = 4
@@ -53,6 +53,3 @@ def main(playlist_id):
 
     return games
 
-if __name__ == '__main__':
-    # Call the main function with a default playlist ID (optional)
-    main(5206929684)
