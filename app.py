@@ -13,6 +13,12 @@ app = Flask(__name__)
 cors = CORS(app, resources={r"/get_playlist/*": {"origins": [url_front_local,url_front_remote]}})
 
 
+@app.route("/")
+def hello_world():
+    return """
+    <p>API Guess The Song</p>
+    <p>Route to request a playlist at /get_playlist?playlist_id=theplaylistid</p>
+    """
 
 @app.route('/get_playlist', methods=['GET'])
 def get_playlist():
@@ -20,7 +26,6 @@ def get_playlist():
     text = python.get_playlist_by_id(playlist_id)
     response = jsonify(text)
     return response
-
 
 
 
