@@ -53,3 +53,19 @@ def get_playlist_by_id(playlist_id):
 
     return games
 
+def search_playlist(query):
+    url = f"https://api.deezer.com/search/playlist?q={query}"
+    response = requests.get(url)
+    playlists_query = response.json()["data"]
+
+    playlists_infos=[]
+
+    for playlist in playlists_query:
+        new_playlist={}
+        new_playlist["title"]=playlist["title"]
+        new_playlist["id"]=playlist["id"]
+        new_playlist["cover"]=playlist["picture_medium"]
+        playlists_infos.append(new_playlist)
+
+    print(playlists_infos)
+    return playlists_infos

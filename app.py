@@ -18,6 +18,7 @@ def hello_world():
     return """
     <p>API Guess The Song</p>
     <p>Route to request a playlist at /get_playlist?playlist_id=theplaylistid</p>
+    <p>Route to search for a playlist /search?query=playlistname</p>
     """
 
 @app.route('/get_playlist', methods=['GET'])
@@ -27,6 +28,12 @@ def get_playlist():
     response = jsonify(text)
     return response
 
+@app.route('/search', methods=['GET'])
+def search_playlist_id():
+    query = request.args.get('query',default="Riot Games Worlds",type=str)
+    text = python.search_playlist(query)
+    response = jsonify(text)
+    return response
 
 
 if __name__ == '__main__':
