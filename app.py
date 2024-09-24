@@ -30,7 +30,7 @@ def get_playlist():
 
 @app.route('/search', methods=['GET'])
 def search_playlist_id():
-    query = request.args.get('query',default="Riot Games Worlds",type=str)
+    query = request.args.get('query',default="Riot Games Worlds")
     text = python.search_playlist(query)
     response = jsonify(text)
     return response

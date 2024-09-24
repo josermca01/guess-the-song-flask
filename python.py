@@ -54,6 +54,8 @@ def get_playlist_by_id(playlist_id):
     return games
 
 def search_playlist(query):
+    if(isinstance(query,int)):
+        return get_playlist_by_id(query)
     url = f"https://api.deezer.com/search/playlist?q={query}&limit=15"
     response = requests.get(url)
     playlists_query = response.json()["data"]
