@@ -1,14 +1,33 @@
 import requests
 import random
 
+urlplaylist = "https://api.deezer.com/playlist/"
+
+def jsondata(url):
+    response = requests.get(url)
+    return response.json()
+
+
 def get_playlist_by_id(playlist_id):
+    url = urlplaylist+f"{playlist_id}"
+    playlist_data = jsondata(url)
+    playlist=[]
+
+    new_playlist={}
+    new_playlist["title"]=playlist_data["title"]
+    new_playlist["id"]=playlist_data["id"]
+    new_playlist["cover"]=playlist_data["picture_medium"]
+    playlist.append(new_playlist)
+
+    return playlist
+
+def get_playlist_tracks_by_id(playlist_id):
     # Step 1: Retrieve the tracks in the playlist
     NUMGAMES = 3
     NUMSONGS = 4
     TAM = 70
-    url = f"https://api.deezer.com/playlist/{playlist_id}/tracks?limit={TAM}"
-    response = requests.get(url)
-    playlist_tracks = response.json()["data"]
+    url = urlplaylist+f"{playlist_id}/tracks?limit={TAM}"
+    playlist_tracks = jsondata(url)["data"]
 
     games = []
     answers = []
@@ -55,10 +74,9 @@ def get_playlist_by_id(playlist_id):
 
 def search_playlist(query):
     if(query.isnumeric()):
-        return get_playlist_by_id(query)
+        return get_playlist_by_id(int(query))
     url = f"https://api.deezer.com/search/playlist?q={query}&limit=15"
-    response = requests.get(url)
-    playlists_query = response.json()["data"]
+    playlists_query = jsondata(url)["data"]
 
     playlists_infos=[]
 
@@ -69,5 +87,4 @@ def search_playlist(query):
         new_playlist["cover"]=playlist["picture_medium"]
         playlists_infos.append(new_playlist)
 
-    print(playlists_infos)
     return playlists_infos

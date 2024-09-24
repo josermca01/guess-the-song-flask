@@ -25,7 +25,7 @@ def hello_world():
 @app.route('/get_playlist', methods=['GET'])
 def get_playlist():
     playlist_id = request.args.get('playlist_id',default=5206929684,type=int)
-    text = python.get_playlist_by_id(playlist_id)
+    text = python.get_playlist_tracks_by_id(playlist_id)
     response = jsonify(text)
     return response
 
