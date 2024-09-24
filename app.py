@@ -11,6 +11,7 @@ url_front_remote = os.getenv("URL_FRONT_REMOTE")
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/get_playlist/*": {"origins": [url_front_local,url_front_remote]}})
+cors = CORS(app, resources={r"/search/*": {"origins": [url_front_local,url_front_remote]}})
 
 
 @app.route("/")
