@@ -12,7 +12,7 @@ All the data and samples used in the project comes from the [Deezer API](https:/
 
 It is all heavily inspired on [Musicle](https://musicle.app/), so be sure to go check it out!
 
-This project is being hosted in [Cloudflare Pages](https://pages.cloudflare.com/) while its API is being hosted in [Verce](https://vercel.com/)
+This project is being hosted in [Verce](https://vercel.com/) while its interface is being hosted in [Cloudflare Pages](https://pages.cloudflare.com/)
 
 ## ⌨️ Techs
 
