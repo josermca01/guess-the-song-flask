@@ -8,13 +8,12 @@ import specs_swagger
 
 load_dotenv()
 
-url_front_local = os.getenv("URL_FRONT_LOCAL")
-url_front_remote = os.getenv("URL_FRONT_REMOTE")
+url_front = os.getenv("URL_FRONT")
 
 app = Flask(__name__)
 swagger = Swagger(app,config=specs_swagger.swagger_config)
-cors = CORS(app, resources={r"/get_playlist/*": {"origins": [url_front_local,url_front_remote]}})
-cors = CORS(app, resources={r"/search/*": {"origins": [url_front_local,url_front_remote]}})
+cors = CORS(app, resources={r"/get_playlist/*": {"origins": url_front}})
+cors = CORS(app, resources={r"/search/*": {"origins": url_front}})
  
 @app.route('/get_playlist', methods=['GET'])
 @swag_from(specs_swagger.specs_game)
